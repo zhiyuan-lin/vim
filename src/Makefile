@@ -353,7 +353,7 @@ CClink = $(CC)
 #CONF_OPT_GUI = --enable-gui=gtk2 --disable-gtktest
 #CONF_OPT_GUI = --enable-gui=gnome2
 #CONF_OPT_GUI = --enable-gui=gnome2 --disable-gtktest
-#CONF_OPT_GUI = --enable-gui=gtk3
+CONF_OPT_GUI = --enable-gui=gtk3
 #CONF_OPT_GUI = --enable-gui=gtk3 --disable-gtktest
 #CONF_OPT_GUI = --enable-gui=motif
 #CONF_OPT_GUI = --enable-gui=motif --with-motif-lib="-static -lXm -shared"
@@ -377,7 +377,7 @@ CClink = $(CC)
 # Uncomment the next line to fail if one of the requested language interfaces
 # cannot be configured.  Without this Vim will be build anyway, without
 # the failing interfaces.
-#CONF_OPT_FAIL = --enable-fail-if-missing
+CONF_OPT_FAIL = --enable-fail-if-missing
 
 # LUA
 # Uncomment one of these when you want to include the Lua interface.
@@ -387,7 +387,7 @@ CClink = $(CC)
 # Use --with-luajit if you want to use LuaJIT instead of Lua.
 # Set PATH environment variable to find lua or luajit executable.
 # This requires at least "normal" features, "tiny" doesn't work.
-#CONF_OPT_LUA = --enable-luainterp
+CONF_OPT_LUA = --enable-luainterp
 #CONF_OPT_LUA = --enable-luainterp=dynamic
 #CONF_OPT_LUA = --enable-luainterp --with-luajit
 #CONF_OPT_LUA = --enable-luainterp=dynamic --with-luajit
@@ -400,7 +400,7 @@ CClink = $(CC)
 # been reported to work, version 8.0 probably doesn't work, version 8.5 has
 # been reported to work.
 # NOTE: does not work well together with valgrind.
-#CONF_OPT_MZSCHEME = --enable-mzschemeinterp
+CONF_OPT_MZSCHEME = --enable-mzschemeinterp
 # PLT/mrscheme/drscheme Home dir; the PLTHOME environment variable also works
 #CONF_OPT_PLTHOME  = --with-plthome=/usr/local
 #CONF_OPT_PLTHOME  = --with-plthome=/usr/local/plt
@@ -418,7 +418,7 @@ CClink = $(CC)
 # When you get an error for a missing "perl.exp" file, try creating an empty
 # one: "touch perl.exp".
 # This requires at least "normal" features, "tiny" doesn't work.
-#CONF_OPT_PERL = --enable-perlinterp
+CONF_OPT_PERL = --enable-perlinterp
 #CONF_OPT_PERL = --enable-perlinterp=dynamic
 
 # PYTHON
@@ -438,7 +438,7 @@ CClink = $(CC)
 #CONF_OPT_PYTHON = --enable-pythoninterp
 #CONF_OPT_PYTHON = --enable-pythoninterp --with-python-command=python2.7
 #CONF_OPT_PYTHON = --enable-pythoninterp=dynamic
-#CONF_OPT_PYTHON3 = --enable-python3interp
+CONF_OPT_PYTHON3 = --enable-python3interp
 #CONF_OPT_PYTHON3 = --enable-python3interp --with-python3-command=python3.6
 #CONF_OPT_PYTHON3 = --enable-python3interp=dynamic
 
@@ -447,7 +447,7 @@ CClink = $(CC)
 # First one for static linking, second one for loading when used.
 # Debian package is "ruby-dev".
 # This requires at least "normal" features, "tiny" doesn't work.
-#CONF_OPT_RUBY = --enable-rubyinterp
+CONF_OPT_RUBY = --enable-rubyinterp
 #CONF_OPT_RUBY = --enable-rubyinterp=dynamic
 #CONF_OPT_RUBY = --enable-rubyinterp --with-ruby-command=ruby1.9.1
 
@@ -456,13 +456,13 @@ CClink = $(CC)
 # First one is for static linking, second one for dynamic loading.
 # Debian package is "tcl-dev".
 # This requires at least "normal" features, "tiny" doesn't work.
-#CONF_OPT_TCL = --enable-tclinterp
+CONF_OPT_TCL = --enable-tclinterp
 #CONF_OPT_TCL = --enable-tclinterp=dynamic
 #CONF_OPT_TCL = --enable-tclinterp --with-tclsh=tclsh8.4
 
 # CSCOPE
 # Uncomment this when you want to include the Cscope interface.
-#CONF_OPT_CSCOPE = --enable-cscope
+CONF_OPT_CSCOPE = --enable-cscope
 
 # NETBEANS - NetBeans interface. Only works with Motif, GTK, and gnome.
 # Motif version must have XPM libraries (see |netbeans-xpm|).
@@ -534,7 +534,7 @@ CClink = $(CC)
 # The default is "huge" for most systems.
 #CONF_OPT_FEAT = --with-features=tiny
 #CONF_OPT_FEAT = --with-features=normal
-#CONF_OPT_FEAT = --with-features=huge
+CONF_OPT_FEAT = --with-features=huge
 
 # COMPILED BY - For including a specific e-mail address for ":version".
 #CONF_OPT_COMPBY = "--with-compiledby=John Doe <JohnDoe@yahoo.com>"
@@ -579,7 +579,7 @@ CClink = $(CC)
 # another compiler.  It is wise to run 'make reconfig' to start all over
 # again.
 #CC = cc
-#CC = gcc
+CC = gcc
 #CC = clang
 
 # COMPILER FLAGS - change as you please. Either before running {{{1
@@ -589,6 +589,8 @@ CClink = $(CC)
 # When not defined, configure will try to use -O2 for gcc and -O for others.
 #CFLAGS = -g
 #CFLAGS = -O
+CFLAGS = -Wdate-time -s -O2 -march=native -mtune=native -flto=auto -ffat-lto-objects -fstack-protector-strong \
+	-Wformat -Werror=format-security -D_REENTRANT -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
 
 # Optimization limits - depends on the compiler.  Automatic check in configure
 # doesn't work very well, because many compilers only give a warning for
@@ -954,7 +956,7 @@ TOOLS = xxd/xxd$(EXEEXT)
 ### prefix	the top directory for the data (default "/usr/local")
 #
 # Uncomment the next line to install Vim in your home directory.
-#prefix = $(HOME)
+prefix = $(HOME)/.local
 
 ### exec_prefix	is the top directory for the executable (default $(prefix))
 #
